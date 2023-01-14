@@ -1,24 +1,33 @@
-function writedata(mieidati,gist,token){
-$.ajax(
-        { 
-            url: 'https://api.github.com/gists/' + gist,
-            type: 'PATCH',  
-                beforeSend: function(xhr) { 
-                    xhr.setRequestHeader("Authorization", "token "+token); 
-                },
-            data: '{"description": "updated gist via ajax","public": true,"files": {"testa.txt": {"content":"'+ mieidati+'"}}}',
-            async: false,
-            success: function (result) {
-                if (result.isOk == false) console.log("Caricato con successo: " + result.message);
-                else console.log("Dati non salvati: " + result.message);
+    function writedata(mieidati,gist,token){
+        var data = {
+            "description": "posting gist test",
+            "public": true,
+            "files": {
+              "arraySaved.js": {
+                "content": mieidati
+              }
             }
-        }).done(function(response) {
-            console.log(response);
-            }
-    );
- 
-}
- 
+          }
+
+        $.ajax({ 
+            url: 'https://api.github.com/gists/'+gist,
+            type: 'POST',
+            //type: 'PATCH',	
+            dataType: 'json',
+            data: JSON.stringify(data),
+            beforeSend: function(xhr) {xhr.setRequestHeader("Authorization", "token "+token);},
+            async: false
+            }).fail( function(e) {
+                console.warn("Dati non salvati errore:", e);
+            }).done(function(response) {
+               console.log("Done: " +  response);
+            });
+    }
+
+        
+        
+        
+        
  
 function convertiMultiDimensionalArray(name,arr){
     var fil = "var "+name+" = [\\n'" + arr[0] + "'";
