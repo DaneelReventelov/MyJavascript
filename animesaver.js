@@ -11,9 +11,9 @@ function writedata(mieidati,gist,token,file){
             "description": "posting gist test",
             "public": true,
             "files": {
-               file: {
+            file: {
+               //'"' + file + '"': {
                 "content": mieidati
-              }
             }
           }
 
@@ -29,7 +29,7 @@ function writedata(mieidati,gist,token,file){
                 console.warn("Dati non salvati errore:", e);
             }).done(function(response) {
                console.log("Done: " +  response);
-            });
+            })
     }
 
         
