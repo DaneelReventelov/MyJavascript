@@ -1,18 +1,28 @@
 
 function salvaFiltro(mieidati,gist,token){
-    writedata(mieidati,gist,token,"arraySaved.js");
+    var data = {
+        "description": "posting gist",
+        "public": true,
+        "files": {
+        "arraySavedFiltri.js": {
+                "content": mieidati
+                }
+            }
+        }
+    sendData(data,gist,token)
 }
 
 function salvaAttivo(mieidati,gist,token){
-    writedata(mieidati,gist,token,"arraySaved.js");
-}
-
-function salvaFiltro3(mieidati,gist,token){
-    writedata(mieidati,gist,token,'"arraySaved.js"');
-}
-
-function salvaAttivo3(mieidati,gist,token){
-    writedata(mieidati,gist,token,'"arraySaved.js"');
+    var data = {
+        "description": "posting gist",
+        "public": true,
+        "files": {
+        "arraySavedAttivi.js": {
+                "content": mieidati
+                }
+            }
+        }
+    sendData(data,gist,token)
 }
 
 
@@ -21,8 +31,7 @@ function writedata(mieidati,gist,token,file){
         "description": "posting gist",
         "public": true,
         "files": {
-            file: {
-           //'"' + file + '"': {
+        "arraySaved.js": {
                 "content": mieidati
                 }
             }
@@ -33,7 +42,7 @@ function writedata(mieidati,gist,token,file){
 
 
 function sendData(data,gist,token){
-    
+
         $.ajax({ 
             url: 'https://api.github.com/gists/'+gist,
             type: 'POST',
