@@ -1,9 +1,17 @@
-    function writedata(mieidati,gist,token){
+function salvaFiltro(mieidati,gist,token){
+    writedata(mieidati,gist,token,"arraySaved.js");
+}
+
+function salvaAttivo(mieidati,gist,token){
+    writedata(mieidati,gist,token,"arraySaved.js");
+}
+
+function writedata(mieidati,gist,token,file){
         var data = {
             "description": "posting gist test",
             "public": true,
             "files": {
-              "arraySaved.js": {
+               file: {
                 "content": mieidati
               }
             }
